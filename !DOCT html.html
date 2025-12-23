@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Wishes 💖</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    overflow:hidden;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    font-family:'Segoe UI',sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+}
+
+/* Center button */
+.center{
+    position:absolute;
+    z-index:10;
+    text-align:center;
+}
+
+button{
+    padding:14px 22px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#ff5c8a;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
+}
+
+/* Wishes */
+.wish{
+    position:absolute;
+    font-size:16px;
+    font-weight:600;
+    animation: floatUp 4s linear forwards;
+    white-space:nowrap;
+}
+
+@keyframes floatUp{
+    from{
+        opacity:1;
+        transform:translateY(0);
+    }
+    to{
+        opacity:0;
+        transform:translateY(-250px);
+    }
+}
+
+/* Balloons */
+.balloon{
+    position:absolute;
+    font-size:40px;
+    animation: balloonUp 6s linear forwards;
+}
+
+@keyframes balloonUp{
+    from{bottom:-60px;}
+    to{bottom:110%;}
+}
+
+/* Confetti */
+.confetti{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background:white;
+    animation: confettiFall 4s linear forwards;
+}
+
+@keyframes confettiFall{
+    from{top:-10px; opacity:1;}
+    to{top:110%; opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="center">
+    <h1>🎂 MY DARLING HAPPY BIRTHDAY 🎂</h1>
+    <button onclick="explode()">Tap for Magic ✨</button>
+</div>
+
+<script>
+const wishes = [
+    "Happy Birthday My Love 💖",
+ 
+    "May all your dreams come true ✨",
+    " Darling I’m so lucky to have you ❤️",
+  
+    "Forever grateful for you 💕",
+    "You deserve all happiness ",
+    "Darling thankyou for making me smile always 🥰"
+];
+
+function explode(){
+    // Wishes
+    for(let i=0;i<20;i++){
+        setTimeout(createWish, i*150);
+        setTimeout(createBalloon, i*200);
+        setTimeout(createConfetti, i*50);
+    }
+}
+
+function createWish(){
+    const wish = document.createElement("div");
+    wish.className = "wish";
+    wish.innerText = wishes[Math.floor(Math.random()*wishes.length)];
+    wish.style.left = Math.random()*80 + "%";
+    wish.style.bottom = "20px";
+    document.body.appendChild(wish);
+    setTimeout(()=>wish.remove(),4000);
+}
+
+function createBalloon(){
+    const balloon = document.createElement("div");
+    balloon.className = "balloon";
+    balloon.innerText = ["🎈","🎈","🎂","💖"][Math.floor(Math.random()*4)];
+    balloon.style.left = Math.random()*90 + "%";
+    document.body.appendChild(balloon);
+    setTimeout(()=>balloon.remove(),6000);
+}
+
+function createConfetti(){
+    const conf = document.createElement("div");
+    conf.className = "confetti";
+    conf.style.left = Math.random()*100 + "%";
+    conf.style.background =
+        ["#fff","#ffd1dc","#ffeb3b","#ff5c8a"]
+        [Math.floor(Math.random()*4)];
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),4000);
+}
+</script>
+
+</body>
+</html>
