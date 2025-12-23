@@ -18,7 +18,6 @@ body{
     color:white;
 }
 
-
 .center{
     position:absolute;
     z-index:10;
@@ -38,17 +37,15 @@ button{
     margin:10px;
 }
 
+#nextBtn{
+    display:none;
+    animation:none;
+}
+
 @keyframes pulse{
     0%{transform:scale(1);}
     50%{transform:scale(1.08);}
     100%{transform:scale(1);}
-}
-
-
-#nextBtn{
-    display:none;
-    animation:none;
-    background:#fff;
 }
 
 
@@ -62,8 +59,9 @@ button{
 
 @keyframes floatUp{
     from{opacity:1; transform:translateY(0);}
-    to{opacity:0; transform:translateY(-420px);}
+    to{opacity:0; transform:translateY(-450px);}
 }
+
 
 .balloon{
     position:absolute;
@@ -75,7 +73,6 @@ button{
     from{bottom:-80px;}
     to{bottom:120%;}
 }
-
 
 .confetti{
     position:absolute;
@@ -100,7 +97,7 @@ button{
 </div>
 
 
-<audio id="bgMusic" loop>
+<audio id="bgMusic" preload="auto" loop>
     <source src="birthday1.mp3" type="audio/mpeg">
 </audio>
 
@@ -108,27 +105,31 @@ button{
 const wishes = [
     "Happy Birthday My Love 💖",
     "May all your dreams come true ✨",
-    "Darling im so lucky to have you ❤️",
+    "Darling I’m so lucky to have you ❤️",
     "Forever grateful for you 💕",
     "You deserve all happiness 💫",
     "Thank you for making me smile always 🥰",
-    " Darling you are my today and all my tomorrows ❤️",
+    "You are my today and all my tomorrows ❤️",
     "I promise to love you forever 💖"
 ];
 
 function explode(){
-    // Start music
     const music = document.getElementById("bgMusic");
-    if(music.paused){
-        music.play();
-    }
+
+  
+    music.muted = false;
+    music.currentTime = 0;
+
+    music.play().catch(err=>{
+        console.log("Audio blocked", err);
+    });
 
    
     setTimeout(()=>{
         document.getElementById("nextBtn").style.display = "inline-block";
     }, 2500);
 
-    // Effects
+ 
     for(let i=0;i<25;i++){
         setTimeout(createWish, i*180);
         setTimeout(createBalloon, i*220);
